@@ -1,3 +1,4 @@
+from pixel_map import Pixel_map
 from settings import size, running
 import pygame as pg
 from map import Map
@@ -11,7 +12,7 @@ class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(size)
-        self.num_level = 0
+        self.num_level = 3 # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
@@ -20,9 +21,11 @@ class Game:
         pg.time.set_timer(MOVE_DOWN_EVENT, MOVE_DOWN_DELAY)
 
     def new_game(self):
-        self.levels = [Level('resources/subway_map.txt', 2, colors.dark_grey),
-                       Level('resources/city_map.txt', 1, colors.black),
-                       Level('resources/forest_map.txt', 4, colors.black)]
+        self.levels = [Level('resources/subway_map.txt', 2, 2, colors.dark_grey),
+                       Level('resources/city_map.txt', 1, 2, colors.black),
+                       Level('resources/forest_map.txt', 4, 2, colors.black),
+                       Level('resources/void_map.txt', 4, 3, colors.white)]
+        self.p_map = Pixel_map(self, self.levels[-1])
         self.sprites = Sprites(self)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.player = Player(self)

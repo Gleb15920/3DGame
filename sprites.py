@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import width, height
+from settings import width
 import os
 
 
@@ -33,9 +33,12 @@ class Sprites:
         self.car = pg.image.load('resources/images/doors/car.png')
         self.car = pg.transform.scale(self.car, (self.tile_y * 2, self.tile_y))
 
+        self.ept = pg.image.load('resources/images/doors/ept.png')
+        self.ept = pg.transform.scale(self.ept, (self.game.levels[-1].player_size[1], self.game.levels[-1].player_size[1]))
+
         self.doors = [(self.stair, 0), (self.car, self.game.levels[self.game.num_level].y +
                                         self.game.levels[self.game.num_level].player_size[1] -
-                                        self.car.get_size()[1]), (0, 0)]
+                                        self.car.get_size()[1]), (self.car, 0), (self.ept, self.game.levels[-1].y)]
 
         self.walls = []
         for i in range(len([name for name in os.listdir('resources/images/walls')

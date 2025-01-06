@@ -2,11 +2,11 @@ from settings import width, height
 
 
 class Level:
-    def __init__(self, path, col_x, background):
+    def __init__(self, path, col_x, col_y, background):
         self.background = background
         self.map_path = path
         self.col_tile_x = col_x
-        self.col_tile_y = 2
+        self.col_tile_y = col_y
         self.tile_x = width / self.col_tile_x
         self.tile_y = height / self.col_tile_y
         p_height = (self.tile_y / 5) * 3
@@ -14,3 +14,4 @@ class Level:
         self.player_size = (p_width, p_height)
         self.x = 0
         self.y = self.col_tile_y * self.tile_y - self.player_size[1] - self.tile_y * (2/5)
+        self.hight_of_jump = self.player_size[1] / 2

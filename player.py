@@ -7,18 +7,20 @@ from random import randint
 class Player:
     def __init__(self, game):
         self.game = game
-        self.size = self.game.levels[self.game.num_level].player_size
-        self.x = self.game.levels[self.game.num_level].x
-        self.y = self.game.levels[self.game.num_level].y
+        self.level = self.game.levels[self.game.num_level]
+        self.size = self.level.player_size
+        self.x = self.level.x
+        self.y = self.level.y
         self.anim_shot = 0
         self.to_right = to_right
         self.to_left = to_left
-        self.jump = jump
         self.bar = self.game.sprites.bar
         self.player_imgs_r = self.game.sprites.player_imgs_r
         self.player_imgs_l = self.game.sprites.player_imgs_l
         self.animation = self.player_imgs_r
         self.cont = False # флаг для кнопки E
+        self.vertical_velocity = vertical_velocity
+        self.jump = False
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -26,7 +28,10 @@ class Player:
         elif self.x < 0:
             screen.blit(self.animation[self.anim_shot - 1], (width / 2 - (self.size[0] / 2) + self.x, self.y))
         if self.x >= self.game.layout_width - width - self.size[0] / 2:
-            screen.blit(self.bar, (self.game.layout_width - self.x - width / 2, height / 2))
+            if self.game.num_level == 3:
+                pass
+            else:
+                screen.blit(self.bar, (self.game.layout_width - self.x - width / 2, height / 2))
             self.cont = True
         else:
             self.cont = False
@@ -68,14 +73,18 @@ class Player:
                 elif event.key == pg.K_RIGHT or event.key == pg.K_d:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
-                    if not self.jump[0]:
-                        self.jump = [True, time_of_jump]
+                    if not self.jump:
+                        self.vertical_velocity = -30
+                        self.jump = True
                 if event.key == pg.K_e and self.cont:
                     if self.game.num_level < len(self.game.levels) - 1:
                         if self.game.num_level == 1:
                             self.brumbrum(screen)
+                        elif self.game.num_level == 2:
+                            self.change_level(screen, '! ! ! ! !  RUN  ! ! ! ! !')
+                        else:
+                            self.change_level(screen, 'WHERE ARE YOU?')
                         self.game.num_level += 1
-                        self.change_level(screen, 'WHERE ARE YOU?')
                         self.game.new_game()
                     else:
                         pass # конец игры
@@ -103,14 +112,14 @@ class Player:
                 self.animation = self.player_imgs_l
         else:
             self.anim_shot = 1
-        if self.jump[0]:
-            if self.jump[1] > 0:
-                if self.jump[1] > time_of_jump // 2:
-                    self.y -= speed / 2
-                else:
-                    if self.y + speed <= self.game.levels[self.game.num_level].y:
-                        self.y += speed / 2
-                self.jump[1] -= 1
-            else:
-                self.y += self.game.levels[self.game.num_level].y - self.y
-                self.jump = [False, 0]
+        self.vertical_velocity += gravity
+        self.y += self.vertical_velocity
+        ground = self.level.y
+        barrier = [elem[0] for elem in self.game.map.barriers]
+        val = (self.x // self.level.tile_x + 1) * self.level.tile_x
+        if val in barrier:
+            ground = self.game.map.barriers[barrier.index(val)][1] + self.level.tile_y * (2/5)
+        if self.y >= ground:
+            self.y = ground
+            self.vertical_velocity = 0
+            self.jump = False
