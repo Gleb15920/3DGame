@@ -112,14 +112,31 @@ class Player:
                 self.animation = self.player_imgs_l
         else:
             self.anim_shot = 1
+        if self.y <= 0:
+            self.vertical_velocity = 5
         self.vertical_velocity += gravity
         self.y += self.vertical_velocity
         ground = self.level.y
+        ceil = ground
         barrier = [elem[0] for elem in self.game.map.barriers]
         val = (self.x // self.level.tile_x + 1) * self.level.tile_x
         if val in barrier:
-            ground = self.game.map.barriers[barrier.index(val)][1] + self.level.tile_y * (2/5)
-        if self.y >= ground:
+            list = [elem[1] for elem in self.game.map.barriers if elem[0] == val]
+            ground = max(list) + self.level.tile_y * (2/5)
+            if len(list) == 1:
+                ceil = ground + self.level.tile_y
+            else:
+                list.remove(ground - self.level.tile_y * (2 / 5))
+                ceil = max(list) + self.level.tile_y * (2 / 5) + self.level.tile_y
+        print(self.y, ceil)
+        if self.y > ceil:
+            if ceil < ground < self.level.y:
+                self.y = ground
+            else:
+                self.y = self.level.y
+            self.vertical_velocity = 0
+            self.jump = False
+        elif self.y >= ground:
             self.y = ground
             self.vertical_velocity = 0
             self.jump = False
