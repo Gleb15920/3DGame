@@ -9,4 +9,4 @@ to_right = False
 running = True
 
 vertical_velocity = 0
-gravity = 1
+gravity = 2

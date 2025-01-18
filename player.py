@@ -21,6 +21,9 @@ class Player:
         self.cont = False # флаг для кнопки E
         self.vertical_velocity = vertical_velocity
         self.jump = False
+        self.ceil = 0
+        self.ground = 0
+        self.wall = 0
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -28,9 +31,7 @@ class Player:
         elif self.x < 0:
             screen.blit(self.animation[self.anim_shot - 1], (width / 2 - (self.size[0] / 2) + self.x, self.y))
         if self.x >= self.game.layout_width - width - self.size[0] / 2:
-            if self.game.num_level == 3:
-                pass
-            else:
+            if self.game.num_level != 3:
                 screen.blit(self.bar, (self.game.layout_width - self.x - width / 2, height / 2))
             self.cont = True
         else:
@@ -51,7 +52,7 @@ class Player:
 
     def brumbrum(self, screen):
         self.game.map.animate = True
-        r = 0
+        r = 0 # насколько машина далеко уехала
         for i in range(0, width // 2, int(speed)):
             pg.time.delay(30)
             screen.fill(colors.black)
@@ -74,12 +75,13 @@ class Player:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
-                        self.vertical_velocity = -30
+                        self.vertical_velocity = -40
                         self.jump = True
                 if event.key == pg.K_e and self.cont:
                     if self.game.num_level < len(self.game.levels) - 1:
                         if self.game.num_level == 1:
                             self.brumbrum(screen)
+                            self.change_level(screen, 'WHERE ARE YOU?')
                         elif self.game.num_level == 2:
                             self.change_level(screen, '! ! ! ! !  RUN  ! ! ! ! !')
                         else:
@@ -96,6 +98,13 @@ class Player:
         if self.to_left or self.to_right:
             if self.to_right:
                 if self.game.layout_width - width - self.size[0] / 2 > self.x:
+                    """barrier = [elem[0] for elem in self.game.map.barriers]
+                    val = (self.y // self.level.tile_y + 1) * self.level.tile_y
+                    if val in barrier:
+                        list = [elem[0] for elem in self.game.map.barriers if elem[1] == val]
+                        self.wall = min(list, key=lambda x: abs(x - self.x)) - self.level.tile_y - self.size[0]
+                    print(self.x, self.wall, barrier)
+                    if self.wall >= self.x:"""
                     self.x += speed
                 if self.anim_shot < len(self.animation):
                     self.anim_shot += 1
@@ -112,31 +121,31 @@ class Player:
                 self.animation = self.player_imgs_l
         else:
             self.anim_shot = 1
-        if self.y <= 0:
+
+        if self.y < self.ceil:
             self.vertical_velocity = 5
         self.vertical_velocity += gravity
         self.y += self.vertical_velocity
-        ground = self.level.y
-        ceil = ground
+        self.ground = self.level.y
+        self.ceil = 0
         barrier = [elem[0] for elem in self.game.map.barriers]
         val = (self.x // self.level.tile_x + 1) * self.level.tile_x
         if val in barrier:
             list = [elem[1] for elem in self.game.map.barriers if elem[0] == val]
-            ground = max(list) + self.level.tile_y * (2/5)
+            self.ground = min(list) + self.level.tile_y * (2 / 5)
+            if self.ground < 0:
+                list.remove(self.ground - self.level.tile_y * (2 / 5))
+                self.ground = min(list) + self.level.tile_y * (2 / 5)
             if len(list) == 1:
-                ceil = ground + self.level.tile_y
+                self.ceil = self.ground + self.level.tile_y + self.level.tile_y * (2 / 5)
             else:
-                list.remove(ground - self.level.tile_y * (2 / 5))
-                ceil = max(list) + self.level.tile_y * (2 / 5) + self.level.tile_y
-        print(self.y, ceil)
-        if self.y > ceil:
-            if ceil < ground < self.level.y:
-                self.y = ground
-            else:
-                self.y = self.level.y
-            self.vertical_velocity = 0
-            self.jump = False
-        elif self.y >= ground:
-            self.y = ground
+                list.remove(self.ground - self.level.tile_y * (2 / 5))
+                self.ceil = abs(max(list))
+            if self.ceil > self.y:
+                self.ceil = 0
+        if self.y > self.ceil and not (self.ceil < self.ground < self.level.y):
+            self.ground = self.level.y
+        if self.y >= self.ground:
+            self.y = self.ground
             self.vertical_velocity = 0
             self.jump = False

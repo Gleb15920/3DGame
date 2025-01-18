@@ -1,11 +1,12 @@
 from pixel_map import Pixel_map
-from settings import size, running
+from settings import size, running, width
 import pygame as pg
 from map import Map
 from player import Player
 from level import Level
 import colors
 from sprites import Sprites
+from random import randrange
 
 
 class Game:
@@ -33,9 +34,16 @@ class Game:
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
         self.running = running
 
+    def interferences(self):
+        for _ in range(3):
+            pos_r = randrange(0, width)
+            pg.draw.line(self.screen, colors.black,
+                         (pos_r, 0), (pos_r, width), width=2)
+
     def update(self):
         self.map.draw_map(self.screen)
         self.player.draw_player(self.screen)
+        #self.interferences()
         pg.display.update()
 
     def run(self):

@@ -54,7 +54,7 @@ class Map:
                 elif self.map[i][j] == ',':
                     screen.blit(self.game.p_map.void_tile, cords)
                 elif self.map[i][j] == '#':
-                    screen.blit(self.walls[1], cords)
+                    self.game.p_map.draw_block(screen, cords)
                     self.barriers.append(((j + 1) * self.tile_x - width / 2, (i - 1) * self.tile_y))
                 if not self.animate:
                     screen.blit(self.doors[0], (self.game.layout_width -

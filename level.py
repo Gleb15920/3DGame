@@ -13,5 +13,4 @@ class Level:
         p_width = (105 * p_height) / 137
         self.player_size = (p_width, p_height)
         self.x = 0
-        self.y = self.col_tile_y * self.tile_y - self.player_size[1] - self.tile_y * (2/5)
-        self.hight_of_jump = self.player_size[1] / 2
+        self.y = height - self.player_size[1] - self.tile_y * (2/5)

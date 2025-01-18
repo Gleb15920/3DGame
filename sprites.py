@@ -46,6 +46,3 @@ class Sprites:
             img = pg.image.load(f'resources/images/walls/{i}.jpg')
             img = pg.transform.scale(img, (self.tile_x, self.tile_y))
             self.walls.append(img)
-
-    def set_doors(self):
-        pass
