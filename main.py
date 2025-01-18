@@ -13,7 +13,7 @@ class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(size)
-        self.num_level = 3 # !!!!!!!!!!!!!!!!
+        self.num_level = 0 # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()

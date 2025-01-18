@@ -18,12 +18,6 @@ class Sprites:
             img = pg.transform.flip(img, True, False)
             self.player_imgs_l.append(img)
 
-        self.npc_img = []
-        for i in range(len([name for name in os.listdir('resources/images/npc')
-                            if os.path.isfile(os.path.join('resources/images/npc', name))])):
-            img = pg.image.load(f'resources/images/npc/{i}.png')
-            self.npc_img.append(img)
-
         self.stair = pg.image.load('resources/images/doors/stair.png')
         self.stair = pg.transform.scale(self.stair, (width / 2, self.game.levels[self.game.num_level].y +
                                                      self.game.levels[self.game.num_level].player_size[1]))
