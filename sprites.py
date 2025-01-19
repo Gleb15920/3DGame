@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import width
+from settings import *
 import os
 
 
@@ -17,6 +17,7 @@ class Sprites:
             self.player_imgs_r.append(img)
             img = pg.transform.flip(img, True, False)
             self.player_imgs_l.append(img)
+
 
         self.stair = pg.image.load('resources/images/doors/stair.png')
         self.stair = pg.transform.scale(self.stair, (width / 2, self.game.levels[self.game.num_level].y +

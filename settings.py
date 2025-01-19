@@ -1,11 +1,12 @@
 from screeninfo import get_monitors
 
-size = width, height = get_monitors()[0].width, get_monitors()[0].height
+screen = width, height = get_monitors()[0].width, get_monitors()[0].height
 
-speed = width / 30
+speed = 30
 
 to_left = False
 to_right = False
+running_gui_manager = True
 running = True
 
 vertical_velocity = 0
