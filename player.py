@@ -1,7 +1,9 @@
 import colors
+from code_window import CodeWindow
 from settings import *
 import pygame as pg
 from random import randint
+from subway_braintest import *
 
 
 class Player:
@@ -24,6 +26,8 @@ class Player:
         self.ceil = 0
         self.ground = 0
         self.wall = 0
+        self.code_window = CodeWindow(game)
+
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -75,7 +79,7 @@ class Player:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
-                        self.vertical_velocity = -40
+                        self.vertical_velocity = -hight_jump
                         self.jump = True
                 if event.key == pg.K_e and self.cont:
                     if self.game.num_level < len(self.game.levels) - 1:
@@ -90,6 +94,10 @@ class Player:
                         self.game.new_game()
                     else:
                         pass # конец игры
+
+                if event.key == pg.K_p and self.cont:
+                    self.code_window.run_start_menu()
+
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.to_left = False

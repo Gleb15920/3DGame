@@ -35,6 +35,9 @@ class Sprites:
                                         self.game.levels[self.game.num_level].player_size[1] -
                                         self.car.get_size()[1]), (self.car, 0), (self.ept, self.game.levels[-1].y)]
 
+        self.arrow = pg.image.load('resources/images/braintests/arrow.png')
+        self.arrow = pg.transform.scale(self.arrow, (width // 6, height // 3))
+
         self.walls = []
         for i in range(len([name for name in os.listdir('resources/images/walls')
                             if os.path.isfile(os.path.join('resources/images/walls', name))])):
