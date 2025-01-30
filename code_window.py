@@ -1,20 +1,20 @@
 import pygame as pg
 import pygame_gui
-from settings import *
+from settings import size
 
 
 class CodeWindow:
     def __init__(self, game):
-        self.screen = pg.display.set_mode(screen)
+        self.screen = pg.display.set_mode(size)
         self.running = False
-        self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
         self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((470, 300, 500, 70)),
                                                       manager=self.manager)
         self.submit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70)),
                                                        text='Try',
                                                        manager=self.manager)
         self.start_bg = pg.image.load('resources/images/start_menu/start_background.jpg')
-        self.start_bg = pg.transform.scale(self.start_bg, screen)
+        self.start_bg = pg.transform.scale(self.start_bg, size)
         self.clock = pg.time.Clock()
         self.game = game
         self.screen = game.screen

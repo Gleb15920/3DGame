@@ -5,9 +5,9 @@ from settings import *
 
 class Screensaver:
     def __init__(self, game):
-        self.screen = pg.display.set_mode(screen)
+        self.screen = pg.display.set_mode(size)
         self.running_gui_manager = running_gui_manager
-        self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
         self.start_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 300, 500, 70)),
                                                       text='Start',
                                                       manager=self.manager)
@@ -19,7 +19,7 @@ class Screensaver:
                                                      manager=self.manager)
 
         self.start_bg = pg.image.load('resources/images/start_menu/start_background.jpg')
-        self.start_bg = pg.transform.scale(self.start_bg, screen)
+        self.start_bg = pg.transform.scale(self.start_bg, size)
         self.clock = pg.time.Clock()
         self.game = game
         self.screen = game.screen

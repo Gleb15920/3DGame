@@ -1,8 +1,8 @@
 from screeninfo import get_monitors
 
-screen = width, height = get_monitors()[0].width, get_monitors()[0].height
+size = width, height = get_monitors()[0].width, get_monitors()[0].height
 
-speed = 30
+speed = 80
 
 arrow_amount = 4
 

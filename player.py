@@ -2,6 +2,7 @@ import colors
 from settings import *
 import pygame as pg
 from random import randint
+from code_window import CodeWindow
 
 
 class Player:
@@ -27,7 +28,7 @@ class Player:
         self.mouse_down = False
         self.jump_off = False
         self.is_go_to_end = False
-        self.wall = 0
+        self.wall = self.game.layout_width
         self.code_window = CodeWindow(game)
 
 
@@ -99,10 +100,8 @@ class Player:
                         self.game.new_game()
                     else:
                         pass # конец игры
-
                 if event.key == pg.K_p and self.cont:
                     self.code_window.run_start_menu()
-
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.to_left = False
