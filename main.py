@@ -1,5 +1,5 @@
 from pixel_map import Pixel_map
-from settings import size
+from settings import size, health
 import pygame as pg
 from map import Map
 from player import Player
@@ -8,14 +8,16 @@ import colors
 from sprites import Sprites
 from screensavers import Screensaver
 from subway_braintest import Subway_Braintest
+from gametime import GameTimer
 
 
 class Game:
     def __init__(self):
         pg.init()
+        self.health = GameTimer(health)
         self.running = False
         self.screen = pg.display.set_mode(size)
-        self.num_level = 0 # !!!!!!!!!!!!!!!!
+        self.num_level = 0  # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
@@ -37,11 +39,13 @@ class Game:
         self.p_map = Pixel_map(self, self.levels[-1])
 
     def update(self):
+        self.health.activate()
         self.map.draw_map(self.screen)
         if self.num_level == 0:
             self.subway_braintest.draw(self.screen)
         self.p_map.boss(self.screen)
         self.player.draw_player(self.screen)
+        self.health.update(self.screen)
         pg.display.update()
 
     def run(self):
@@ -49,6 +53,7 @@ class Game:
             self.screen.fill(self.levels[self.num_level].background)
             self.player.control(self.screen)
             self.update()
+
 
 if __name__ == '__main__':
     game = Game()

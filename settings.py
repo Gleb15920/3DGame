@@ -13,3 +13,5 @@ running_gui_manager = True
 vertical_velocity = 0
 gravity = 2
 hight_jump = 40
+
+health = 10000  # time of life in miliseconds

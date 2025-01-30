@@ -46,6 +46,7 @@ class Player:
             self.cont = False
 
     def change_level(self, screen, text):
+        self.game.health.do_pause()
         pg.draw.rect(screen, colors.black, (0, 0, width, height))
         for i in range(1500):
             pg.draw.rect(screen, colors.white, (randint(0, width),
