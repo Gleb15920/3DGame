@@ -95,7 +95,7 @@ class Pixel_map:
         bdos = pg.transform.scale(bdos, (w_bdos, h_bdos))
         screen.blit(bdos, (0, 0))
         pg.display.flip()
-        pg.time.delay(5000)
+        pg.time.delay(3000)
 
     def boss(self, screen):
         if self.game.num_level == len(self.game.levels) - 1:
