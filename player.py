@@ -1,4 +1,5 @@
 import colors
+from code_controller import Code_controller
 from code_window import CodeWindow
 from settings import *
 import pygame as pg
@@ -26,7 +27,8 @@ class Player:
         self.ceil = 0
         self.ground = 0
         self.wall = 0
-        self.code_window = CodeWindow(game)
+        self.code_controller = Code_controller(self)
+        self.code_window = CodeWindow(game, self.code_controller)
 
 
     def draw_player(self, screen):
@@ -96,7 +98,8 @@ class Player:
                         pass # конец игры
 
                 if event.key == pg.K_p and self.cont:
-                    self.code_window.run_start_menu()
+                    if self.game.num_level == 0 or self.game.num_level == 1 or self.game.num_level == 2:
+                         self.code_window.run_start_menu()
 
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:

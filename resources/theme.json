@@ -58,5 +58,22 @@
                  "hovered_normal": "0.5"
              }
          }
+     },
+   "label":
+     {
+         "colours":
+         {
+             "normal_text": "white"
+         },
+         "font":
+         {
+             "size": "48"
+         },
+         "misc":
+         {
+             "text_shadow": "1",
+             "text_shadow_size": "2",
+             "text_shadow_offset": "0,0"
+         }
      }
  }

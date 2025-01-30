@@ -1,6 +1,7 @@
 
 from pixel_map import Pixel_map
 from subway_braintest import Subway_Braintest
+from city_braintest import City_Braintest
 from settings import screen, width, running_gui_manager
 import pygame as pg
 from map import Map
@@ -17,7 +18,7 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode(screen)
         self.running = False
-        self.num_level = 0 # !!!!!!!!!!!!!!!!
+        self.num_level = 1 # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
@@ -35,7 +36,8 @@ class Game:
         self.sprites = Sprites(self)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.player = Player(self)
-        self.subway_braintest = Subway_Braintest(self, self.sprites.arrow)
+        self.subway_braintest = Subway_Braintest(self, self.sprites.arrows)
+        self.city_braintest = City_Braintest(self, self.sprites.puzzle2)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
 
@@ -48,6 +50,7 @@ class Game:
     def update(self):
         self.map.draw_map(self.screen)
         self.subway_braintest.draw(self.screen)
+        self.city_braintest.draw(self.screen)
         self.player.draw_player(self.screen)
         pg.display.update()
 

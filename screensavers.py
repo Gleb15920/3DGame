@@ -11,10 +11,10 @@ class Screensaver:
         self.start_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 300, 500, 70)),
                                                       text='Start',
                                                       manager=self.manager)
-        self.settings_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70), ),
-                                                         text='Settings',
-                                                         manager=self.manager)
-        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 500, 500, 70), ),
+        # self.settings_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70), ),
+        #                                                  text='Settings',
+        #                                                  manager=self.manager)
+        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70), ),
                                                      text='Exit',
                                                      manager=self.manager)
 
