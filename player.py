@@ -11,7 +11,7 @@ class Player:
         self.size = self.level.player_size
         self.x = self.level.x
         self.y = self.level.y
-        self.anim_shot = 1
+        self.anim_shot = 0
         self.to_right = to_right
         self.to_left = to_left
         self.bar = self.game.sprites.bar
@@ -27,6 +27,9 @@ class Player:
         self.mouse_down = False
         self.jump_off = False
         self.is_go_to_end = False
+        self.wall = 0
+        self.code_window = CodeWindow(game)
+
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -79,7 +82,7 @@ class Player:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
-                        self.vertical_velocity = -40
+                        self.vertical_velocity = -hight_jump
                         self.jump = True
                 if event.key == pg.K_DOWN or event.key == pg.K_s:
                     self.jump_off = True
@@ -96,6 +99,10 @@ class Player:
                         self.game.new_game()
                     else:
                         pass # конец игры
+
+                if event.key == pg.K_p and self.cont:
+                    self.code_window.run_start_menu()
+
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.to_left = False

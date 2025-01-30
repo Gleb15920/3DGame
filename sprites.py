@@ -1,5 +1,6 @@
 import pygame as pg
 from settings import width, height
+from settings import *
 import os
 
 
@@ -54,6 +55,9 @@ class Sprites:
         self.doors = [(self.stair, 0), (self.car, self.game.levels[self.game.num_level].y +
                                         self.game.levels[self.game.num_level].player_size[1] -
                                         self.car.get_size()[1]), (self.ept, self.tile_y * 2 - h_ept)]
+
+        self.arrow = pg.image.load('resources/images/braintests/arrow.png')
+        self.arrow = pg.transform.scale(self.arrow, (width // 6, height // 3))
 
         self.walls = []
         for i in range(len([name for name in os.listdir('resources/images/walls')
