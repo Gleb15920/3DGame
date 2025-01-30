@@ -1,9 +1,7 @@
 import colors
-from code_window import CodeWindow
 from settings import *
 import pygame as pg
 from random import randint
-from subway_braintest import *
 
 
 class Player:
@@ -13,7 +11,7 @@ class Player:
         self.size = self.level.player_size
         self.x = self.level.x
         self.y = self.level.y
-        self.anim_shot = 0
+        self.anim_shot = 1
         self.to_right = to_right
         self.to_left = to_left
         self.bar = self.game.sprites.bar
@@ -25,9 +23,10 @@ class Player:
         self.jump = False
         self.ceil = 0
         self.ground = 0
-        self.wall = 0
-        self.code_window = CodeWindow(game)
-
+        self.wall = self.game.layout_width
+        self.mouse_down = False
+        self.jump_off = False
+        self.is_go_to_end = False
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -35,8 +34,9 @@ class Player:
         elif self.x < 0:
             screen.blit(self.animation[self.anim_shot - 1], (width / 2 - (self.size[0] / 2) + self.x, self.y))
         if self.x >= self.game.layout_width - width - self.size[0] / 2:
-            if self.game.num_level != 3:
+            if self.game.num_level != len(self.game.levels) - 1:
                 screen.blit(self.bar, (self.game.layout_width - self.x - width / 2, height / 2))
+            self.is_go_to_end = True
             self.cont = True
         else:
             self.cont = False
@@ -50,7 +50,7 @@ class Player:
                                                randint(0, height), 20, 20))
         txt = pg.font.SysFont(None, width // 10)
         txt = txt.render(text, True, colors.red)
-        screen.blit(txt, (width / 5, height / 2))
+        screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
         pg.display.flip()
         pg.time.delay(800)
 
@@ -79,45 +79,51 @@ class Player:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
-                        self.vertical_velocity = -hight_jump
+                        self.vertical_velocity = -40
                         self.jump = True
+                if event.key == pg.K_DOWN or event.key == pg.K_s:
+                    self.jump_off = True
                 if event.key == pg.K_e and self.cont:
                     if self.game.num_level < len(self.game.levels) - 1:
                         if self.game.num_level == 1:
                             self.brumbrum(screen)
-                            self.change_level(screen, 'WHERE ARE YOU?')
-                        elif self.game.num_level == 2:
-                            self.change_level(screen, '! ! ! ! !  RUN  ! ! ! ! !')
+                            self.change_level(screen, 'base64')
+                        elif self.game.num_level == len(self.game.levels) - 1:
+                            self.change_level(screen, '!!! RUN !!!')
                         else:
                             self.change_level(screen, 'WHERE ARE YOU?')
                         self.game.num_level += 1
                         self.game.new_game()
                     else:
                         pass # конец игры
-
-                if event.key == pg.K_p and self.cont:
-                    self.code_window.run_start_menu()
-
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.to_left = False
                 elif event.key == pg.K_RIGHT or event.key == pg.K_d:
                     self.to_right = False
+                if event.key == pg.K_DOWN or event.key == pg.K_s:
+                    self.jump_off = False
+            if event.type == pg.MOUSEBUTTONDOWN:
+                self.mouse_down = True
+            elif event.type == pg.MOUSEBUTTONUP:
+                self.mouse_down = False
         if self.to_left or self.to_right:
             if self.to_right:
                 if self.game.layout_width - width - self.size[0] / 2 > self.x:
-                    """barrier = [elem[0] for elem in self.game.map.barriers]
-                    val = (self.y // self.level.tile_y + 1) * self.level.tile_y
+                    barrier = [elem[1] for elem in self.game.map.barriers]
+                    val = (self.y // self.level.tile_y) * self.level.tile_y - self.level.tile_y
                     if val in barrier:
-                        list = [elem[0] for elem in self.game.map.barriers if elem[1] == val]
-                        self.wall = min(list, key=lambda x: abs(x - self.x)) - self.level.tile_y - self.size[0]
-                    print(self.x, self.wall, barrier)
-                    if self.wall >= self.x:"""
-                    self.x += speed
+                        list = [elem[0] for elem in self.game.map.barriers if elem[1] == val and elem[0] > self.x]
+                        if len(list) == 0:
+                            self.wall = self.game.layout_width
+                        else:
+                            self.wall = min(list, key=lambda x: abs(x - self.x)) - self.level.tile_y - self.size[0]
+                    if self.wall >= self.x:
+                        self.x += speed
                 if self.anim_shot < len(self.animation):
                     self.anim_shot += 1
                 else:
-                    self.anim_shot = 1
+                    self.anim_shot = 2
                 self.animation = self.player_imgs_r
             if self.to_left:
                 if width / 2 - self.size[0] / 2 > -self.x:
@@ -125,10 +131,12 @@ class Player:
                 if self.anim_shot < len(self.animation):
                     self.anim_shot += 1
                 else:
-                    self.anim_shot = 1
+                    self.anim_shot = 2
                 self.animation = self.player_imgs_l
         else:
-            self.anim_shot = 1
+            self.anim_shot = 2
+            if self.mouse_down:
+                self.anim_shot = 1
 
         if self.y < self.ceil:
             self.vertical_velocity = 5
@@ -136,6 +144,7 @@ class Player:
         self.y += self.vertical_velocity
         self.ground = self.level.y
         self.ceil = 0
+        self.double_block = False
         barrier = [elem[0] for elem in self.game.map.barriers]
         val = (self.x // self.level.tile_x + 1) * self.level.tile_x
         if val in barrier:
@@ -149,8 +158,13 @@ class Player:
             else:
                 list.remove(self.ground - self.level.tile_y * (2 / 5))
                 self.ceil = abs(max(list))
+                self.double_block = True
             if self.ceil > self.y:
                 self.ceil = 0
+        if self.jump_off:
+            if self.ground + self.size[1] != self.level.tile_y * 2 and not self.double_block:
+                self.vertical_velocity = 100
+                self.ground = self.level.y
         if self.y > self.ceil and not (self.ceil < self.ground < self.level.y):
             self.ground = self.level.y
         if self.y >= self.ground:
