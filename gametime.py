@@ -40,7 +40,6 @@ class GameTimer:
     def update(self, screen: pg.display):
         if self.active:
             self.draw_health_bar(screen, self.check_time())
-            # print(self.active, self.check_time())
         elif not self.pause:
             pass
 
