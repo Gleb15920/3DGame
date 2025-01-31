@@ -87,6 +87,7 @@ class Pixel_map:
                 screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
             pg.display.flip()
         pg.time.delay(5000)
+        self.game.screensaver.running_gui_manager = True
         self.game.screensaver.run_start_menu()
 
     def bad_end(self, screen):
@@ -97,6 +98,7 @@ class Pixel_map:
         screen.blit(bdos, (0, 0))
         pg.display.flip()
         pg.time.delay(3000)
+        self.game.screensaver.running_gui_manager = True
         self.game.screensaver.run_start_menu()
 
     def boss(self, screen):

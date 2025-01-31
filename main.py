@@ -17,14 +17,14 @@ class Game:
         self.running = False
         self.health = GameTimer(health, self)
         self.screen = pg.display.set_mode(size)
-        self.num_level = 0  # !!!!!!!!!!!!!!!!
+        self.num_level = 2  # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
         MOVE_DOWN_DELAY = 500
         MOVE_DOWN_EVENT = pg.USEREVENT + 1
         pg.time.set_timer(MOVE_DOWN_EVENT, MOVE_DOWN_DELAY)
-        self.screensaver = Screensaver(game)
+        self.screensaver = Screensaver(self)
 
     def new_game(self):
         self.running = True
