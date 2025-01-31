@@ -24,6 +24,7 @@ class Game:
         MOVE_DOWN_DELAY = 500
         MOVE_DOWN_EVENT = pg.USEREVENT + 1
         pg.time.set_timer(MOVE_DOWN_EVENT, MOVE_DOWN_DELAY)
+        self.screensaver = Screensaver(game)
 
     def new_game(self):
         self.running = True
@@ -58,5 +59,4 @@ class Game:
 
 if __name__ == '__main__':
     game = Game()
-    screensaver = Screensaver(game)
-    screensaver.run_start_menu()
+    game.screensaver.run_start_menu()

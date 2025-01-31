@@ -35,4 +35,3 @@ class CodeWindow:
                 self.screen.blit(self.start_bg, (0, 0))
                 self.manager.draw_ui(self.screen)
                 pg.display.update()
-

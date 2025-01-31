@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import choice
 from PIL import Image
 import numpy as np
 from settings import width, speed, height
@@ -87,6 +87,7 @@ class Pixel_map:
                 screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
             pg.display.flip()
         pg.time.delay(5000)
+        self.game.screensaver.run_start_menu()
 
     def bad_end(self, screen):
         bdos = pg.image.load('resources/images/BDoS.jpg')
@@ -96,6 +97,7 @@ class Pixel_map:
         screen.blit(bdos, (0, 0))
         pg.display.flip()
         pg.time.delay(3000)
+        self.game.screensaver.run_start_menu()
 
     def boss(self, screen):
         if self.game.num_level == len(self.game.levels) - 1:
