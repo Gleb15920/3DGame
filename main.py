@@ -14,8 +14,8 @@ from gametime import GameTimer
 class Game:
     def __init__(self):
         pg.init()
-        self.health = GameTimer(health, self)
         self.running = False
+        self.health = GameTimer(health, self)
         self.screen = pg.display.set_mode(size)
         self.num_level = 0  # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
@@ -27,6 +27,7 @@ class Game:
 
     def new_game(self):
         self.running = True
+        self.health.activate()
         self.levels = [Level('resources/subway_map.txt', 2, 2, colors.dark_grey),
                        Level('resources/city_map.txt', 1, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
@@ -39,13 +40,13 @@ class Game:
         self.p_map = Pixel_map(self, self.levels[-1])
 
     def update(self):
-        self.health.activate()
         self.map.draw_map(self.screen)
         if self.num_level == 0:
             self.subway_braintest.draw(self.screen)
         self.p_map.boss(self.screen)
         self.player.draw_player(self.screen)
-        self.health.update(self.screen)
+        if not self.health.update(self.screen):
+            self.p_map.death(self.screen)
         pg.display.update()
 
     def run(self):

@@ -14,12 +14,11 @@ class GameTimer:
         self.game = game
 
     def activate(self):
-        if not self.active and not self.pause:
+        if not self.active:
             self.active = True
             self.start_time = get_ticks()
         elif self.pause:
             self.start_time += get_ticks() - self.cur_time
-            self.active = True
             self.pause = False
 
     def deactivate(self):
@@ -27,21 +26,20 @@ class GameTimer:
         self.start_time = 0
 
     def do_pause(self):
-        self.active = False
         self.pause = True
 
     def check_time(self):
-        if self.active:
-            self.cur_time = get_ticks()
-            if self.cur_time - self.start_time <= self.duration:
-                return round(100 - (self.cur_time - self.start_time) / self.duration * 100)
+        self.cur_time = get_ticks()
+        if self.cur_time - self.start_time <= self.duration:
+            return round(100 - (self.cur_time - self.start_time) / self.duration * 100)
+        self.deactivate()
         return 0
 
     def update(self, screen: pg.display):
         if self.active:
             self.draw_health_bar(screen, self.check_time())
-        elif not self.pause:
-            pass
+            return True
+        return False
 
     def draw_health_bar(self, screen, health):
         pygame.draw.rect(screen, "red", (20, height - 70, width - 40, 40))

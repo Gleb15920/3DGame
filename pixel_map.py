@@ -158,3 +158,20 @@ class Pixel_map:
             screen.blit(im, (x, y))
         except: pass
         screen.blit(self.void_block, (x, y + self.slide))
+
+    def death(self, screen):
+        self.game.running = False
+        death = True
+        while death:
+            screen.fill("black")
+            txt = pg.font.SysFont(None, 48)
+            txt = txt.render("Game Over!", True, colors.white)
+            screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
+            for event in pg.event.get():
+                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                    death = False
+                    self.game.num_level = 0
+                    self.game.new_game()
+                    self.game.run()
+            pg.display.flip()
+

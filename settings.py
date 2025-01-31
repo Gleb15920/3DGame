@@ -14,4 +14,4 @@ vertical_velocity = 0
 gravity = 2
 hight_jump = 40
 
-health = 2 * 1000 * 60  # time of life in minutes
+health = 1 * 1000 * 60  # time of life in minutes
