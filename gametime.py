@@ -11,16 +11,13 @@ class GameTimer:
         self.cur_time = 0
 
     def activate(self):
-        print("fwefwef")
         if not self.active and not self.pause:
-            print("wpoi")
             self.active = True
             self.start_time = get_ticks()
         elif self.pause:
             self.start_time += get_ticks() - self.cur_time
             self.active = True
             self.pause = False
-            print("dqdq")
 
     def deactivate(self):
         self.active = False
@@ -40,4 +37,9 @@ class GameTimer:
         if self.active:
             text = pg.font.Font(None, 100).render(str(self.check_time()), False, "white")
             screen.blit(text, (100, 100))
+            self.draw_health_bar(str(self.check_time()))
             # print(self.active, self.check_time())
+
+    def draw_health_bar(self, health):
+        pass
+
