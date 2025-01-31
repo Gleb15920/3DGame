@@ -1,14 +1,17 @@
+import pygame.draw
 from pygame.time import get_ticks
 import pygame as pg
+from settings import width, height
 
 
 class GameTimer:
-    def __init__(self, duration):
+    def __init__(self, duration, game):
         self.start_time = 0
         self.duration = duration
         self.active = False
         self.pause = False
         self.cur_time = 0
+        self.game = game
 
     def activate(self):
         if not self.active and not self.pause:
@@ -32,14 +35,18 @@ class GameTimer:
             self.cur_time = get_ticks()
             if self.cur_time - self.start_time <= self.duration:
                 return round(100 - (self.cur_time - self.start_time) / self.duration * 100)
+        return 0
 
     def update(self, screen: pg.display):
         if self.active:
-            text = pg.font.Font(None, 100).render(str(self.check_time()), False, "white")
-            screen.blit(text, (100, 100))
-            self.draw_health_bar(str(self.check_time()))
+            self.draw_health_bar(screen, self.check_time())
             # print(self.active, self.check_time())
+        elif not self.pause:
+            pass
 
-    def draw_health_bar(self, health):
-        pass
+    def draw_health_bar(self, screen, health):
+        pygame.draw.rect(screen, "red", (20, height - 70, width - 40, 40))
+        pygame.draw.rect(screen, "green", (20, height - 70, (width - 40) * health / 100, 40))
+        pygame.draw.rect(screen, "white", (20, height - 70, width - 40, 40), width=1)
+
 

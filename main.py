@@ -14,7 +14,7 @@ from gametime import GameTimer
 class Game:
     def __init__(self):
         pg.init()
-        self.health = GameTimer(health)
+        self.health = GameTimer(health, self)
         self.running = False
         self.screen = pg.display.set_mode(size)
         self.num_level = 0  # !!!!!!!!!!!!!!!!
