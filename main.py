@@ -20,6 +20,7 @@ class Game:
         self.screen = pg.display.set_mode(size)
         self.num_level = 0  # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
+        self.sound = Sound()
         self.new_game()
         self.clock = pg.time.Clock()
         MOVE_DOWN_DELAY = 500
@@ -34,7 +35,6 @@ class Game:
                        Level('resources/city_map.txt', 1, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
-        self.sound = Sound()
         self.sound.play_music(self.num_level)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)

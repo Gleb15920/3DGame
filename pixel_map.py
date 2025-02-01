@@ -107,6 +107,7 @@ class Pixel_map:
         if self.game.num_level == len(self.game.levels) - 1:
             if self.im.get_width() >= width:
                 self.game.running = False
+                self.game.sound.not_walk()
                 monolog = self.monolog_good_ending if self.game.player.is_go_to_end else self.monolog_bad_ending
                 while True:
                     screen.fill(colors.black)

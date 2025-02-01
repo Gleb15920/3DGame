@@ -19,7 +19,7 @@ class Player:
         self.player_imgs_r = self.game.sprites.player_imgs_r
         self.player_imgs_l = self.game.sprites.player_imgs_l
         self.animation = self.player_imgs_r
-        self.cont = False # флаг для кнопки E
+        self.cont = False  # флаг для кнопки E
         self.vertical_velocity = vertical_velocity
         self.jump = False
         self.ceil = 0
@@ -30,7 +30,6 @@ class Player:
         self.is_go_to_end = False
         self.wall = self.game.layout_width
         self.code_window = CodeWindow(game)
-
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -46,6 +45,7 @@ class Player:
             self.cont = False
 
     def change_level(self, screen, text):
+        self.game.sound.not_walk()
         self.game.health.do_pause()
         pg.draw.rect(screen, colors.black, (0, 0, width, height))
         for i in range(1500):
@@ -60,14 +60,16 @@ class Player:
         pg.time.delay(800)
 
     def brumbrum(self, screen):
+        self.game.sound.car()
         self.game.map.animate = True
-        r = 0 # насколько машина далеко уехала
+        r = 0  # насколько машина далеко уехала
         for i in range(0, width // 2, int(speed)):
             pg.time.delay(30)
             screen.fill(colors.black)
             self.game.map.draw_map(screen)
             screen.blit(self.game.sprites.doors[1][0], (self.game.layout_width -
-                                        self.game.player.x - width / 2 + r, self.game.sprites.doors[1][1]))
+                                                        self.game.player.x - width / 2 + r,
+                                                        self.game.sprites.doors[1][1]))
             pg.display.update()
             r += speed
         self.game.map.animate = False
@@ -79,8 +81,10 @@ class Player:
                 self.game.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
+                    self.game.sound.walk()
                     self.to_left = True
                 elif event.key == pg.K_RIGHT or event.key == pg.K_d:
+                    self.game.sound.walk()
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
@@ -100,7 +104,7 @@ class Player:
                         self.game.num_level += 1
                         self.game.new_game()
                     else:
-                        pass # конец игры
+                        pass  # конец игры
                 if event.key == pg.K_p and self.cont:
                     self.code_window.run_start_menu()
             if event.type == pg.KEYUP:
@@ -111,6 +115,7 @@ class Player:
                 if event.key == pg.K_DOWN or event.key == pg.K_s:
                     self.jump_off = False
             if event.type == pg.MOUSEBUTTONDOWN:
+                self.game.sound.hit()
                 self.mouse_down = True
             elif event.type == pg.MOUSEBUTTONUP:
                 self.mouse_down = False
@@ -141,6 +146,7 @@ class Player:
                     self.anim_shot = 2
                 self.animation = self.player_imgs_l
         else:
+            self.game.sound.not_walk()
             self.anim_shot = 2
             if self.mouse_down:
                 self.anim_shot = 1
