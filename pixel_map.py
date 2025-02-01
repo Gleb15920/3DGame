@@ -177,8 +177,7 @@ class Pixel_map:
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     death = False
-                    self.game.num_level = 0
-                    self.game.new_game()
-                    self.game.run()
+                    self.game.screensaver.running_gui_manager = True
+                    self.game.screensaver.run_start_menu()
             pg.display.flip()
 

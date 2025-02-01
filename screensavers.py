@@ -26,6 +26,7 @@ class Screensaver:
 
     def run_start_menu(self):
         self.game.sound.play_menu_music()
+        self.game.num_level = 0
         while self.running_gui_manager:
             time_delta = self.clock.tick(60) / 1000.0
             for event in pg.event.get():
@@ -36,6 +37,7 @@ class Screensaver:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if hasattr(event, 'ui_element') and event.ui_element == self.start_btn:
                         self.running_gui_manager = False
+                        self.game.new_game()
                         self.game.run()
                     elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
                         pass
