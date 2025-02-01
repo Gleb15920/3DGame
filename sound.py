@@ -16,7 +16,7 @@ class Sound:
         self.death_sound = pg.mixer.Sound("resources/music/death_sound.mp3")
         self.menu_music = pg.mixer.Sound("resources/music/menu_music.wav")
 
-    def play(self, num_level):
+    def play_music(self, num_level):
         if num_level == 0:
             pg.mixer.music.stop()
             pg.mixer.music = self.metro_music

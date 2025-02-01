@@ -35,7 +35,7 @@ class Game:
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
         self.sound = Sound()
-        self.sound.play(self.num_level)
+        self.sound.play_music(self.num_level)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
@@ -54,7 +54,7 @@ class Game:
         pg.display.update()
 
     def run(self):
-        self.sound.play(self.num_level)
+        self.sound.play_music(self.num_level)
         while self.running:
             self.screen.fill(self.levels[self.num_level].background)
             self.player.control(self.screen)
