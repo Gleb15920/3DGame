@@ -21,10 +21,11 @@ class Sound:
         self.hit_sound = pg.mixer.Sound("resources/sound/hit_sound.mp3")
         self.teleport_sound = pg.mixer.Sound("resources/sound/teleport_sound.mp3")
 
+        self.walking = False
+
         self.not_walk()
 
-    def play_music(self, num_level):
-        self.not_walk()
+    def update(self, num_level):
         if num_level == 0:
             pg.mixer.music.stop()
             pg.mixer.music = self.metro_music
@@ -66,10 +67,13 @@ class Sound:
         pg.mixer.music.set_volume(music_volume)
 
     def walk(self):
-        self.city_walking_sound.play(-1)
+        if not self.walking:
+            self.city_walking_sound.play()
+            self.walking = True
 
     def not_walk(self):
         self.city_walking_sound.stop()
+        self.walking = False
 
     def car(self):
         self.not_walk()
