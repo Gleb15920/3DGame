@@ -25,7 +25,7 @@ class Screensaver:
         self.screen = game.screen
 
     def run_start_menu(self):
-        self.game.music.play_menu_music()
+        self.game.sound.play_menu_music()
         while self.running_gui_manager:
             time_delta = self.clock.tick(60) / 1000.0
             for event in pg.event.get():

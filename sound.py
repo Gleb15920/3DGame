@@ -2,7 +2,7 @@ import pygame as pg
 from settings import music_volume, sound_volume
 
 
-class Music:
+class Sound:
     def __init__(self):
         pg.init()
         pg.mixer.music.set_volume(music_volume)

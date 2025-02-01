@@ -38,7 +38,7 @@ class Pixel_map:
         self.im = pg.image.fromstring(self.im.tobytes(), self.im.size, self.im.mode)
 
     def good_end(self, screen):
-        self.game.music.good_end()
+        self.game.sound.good_end()
         vr_image = self.game.sprites.vr
         screen.blit(vr_image, (0, height / 2 - vr_image.get_height() / 2))
         pg.display.flip()
@@ -97,7 +97,7 @@ class Pixel_map:
         h_bdos = (w_bdos * 768) / 1366
         bdos = pg.transform.scale(bdos, (w_bdos, h_bdos))
         screen.blit(bdos, (0, 0))
-        self.game.music.error()
+        self.game.sound.error()
         pg.display.flip()
         pg.time.delay(3000)
         self.game.screensaver.running_gui_manager = True
@@ -168,7 +168,7 @@ class Pixel_map:
     def death(self, screen):
         self.game.running = False
         death = True
-        self.game.music.death()
+        self.game.sound.death()
         while death:
             screen.fill("black")
             txt = pg.font.SysFont(None, 48)
