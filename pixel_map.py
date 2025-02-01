@@ -30,7 +30,7 @@ class Pixel_map:
         self.void_tile = pg.image.fromstring(self.img.tobytes(), self.img.size, self.img.mode)
 
     def set_settings(self):
-        self.level.y += self.level.tile_y * (2/5)
+        self.level.y += self.level.tile_y * (2 / 5)
 
     def draw_block(self, screen, cords):
         x, y = cords
@@ -41,5 +41,6 @@ class Pixel_map:
             im = self.img.crop((0, self.img.size[1] - self.slide, self.img.size[0], self.img.size[1]))
             im = pg.image.fromstring(im.tobytes(), im.size, im.mode)
             screen.blit(im, (x, y))
-        except: pass
+        except:
+            pass
         screen.blit(self.void_tile, (x, y + self.slide))

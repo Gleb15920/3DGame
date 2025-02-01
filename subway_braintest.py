@@ -7,7 +7,6 @@ class Subway_Braintest:
         self.sprites = sprites
         self.len_sprites = len(sprites)
 
-
     def draw(self, screen):
         if self.game.num_level != 0:
             return
@@ -25,4 +24,3 @@ class Subway_Braintest:
             screen.blit(self.sprites[i], (self.game.layout_width -
                                           self.game.player.x - width - distance, 100))
             distance += 3000
-

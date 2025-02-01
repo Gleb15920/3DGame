@@ -25,13 +25,13 @@ class Screensaver:
         self.game = game
         self.screen = game.screen
 
-
     def run_start_menu(self):
         while self.running_gui_manager:
             time_delta = self.clock.tick(60) / 1000.0
             for event in pg.event.get():
                 if (event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE) or
-                        (event.type == pygame_gui.UI_BUTTON_PRESSED and hasattr(event, 'ui_element') and event.ui_element == self.exit_btn)):
+                        (event.type == pygame_gui.UI_BUTTON_PRESSED and hasattr(event,
+                                                                                'ui_element') and event.ui_element == self.exit_btn)):
                     self.running_gui_manager = False
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if hasattr(event, 'ui_element') and event.ui_element == self.start_btn:
@@ -46,4 +46,3 @@ class Screensaver:
                 self.screen.blit(self.start_bg, (0, 0))
                 self.manager.draw_ui(self.screen)
                 pg.display.update()
-

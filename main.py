@@ -1,4 +1,3 @@
-
 from pixel_map import Pixel_map
 from subway_braintest import Subway_Braintest
 from city_braintest import City_Braintest
@@ -14,13 +13,14 @@ from random import randrange
 from startscreensaver import *
 import sys
 
+
 class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(screen)
         self.running = False
-        self.num_level = 0 # !!!!!!!!!!!!!!!!
-        #pg.event.set_grab(True)
+        self.num_level = 0  # !!!!!!!!!!!!!!!!
+        # pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
         MOVE_DOWN_DELAY = 500
@@ -63,6 +63,7 @@ class Game:
             self.screen.fill(self.levels[self.num_level].background)
             self.player.control(self.screen)
             self.update()
+
 
 if __name__ == '__main__':
     game = Game()

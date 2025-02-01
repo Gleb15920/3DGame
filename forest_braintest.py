@@ -10,4 +10,4 @@ class Forest_Braintest:
         if self.game.num_level != 2:
             return
         screen.blit(self.sprite, (self.game.layout_width -
-                                    self.game.player.x - 6000, 30))
+                                  self.game.player.x - 6000, 30))

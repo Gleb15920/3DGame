@@ -10,4 +10,4 @@ class City_Braintest():
         if self.game.num_level != 1:
             return
         screen.blit(self.sprite, (self.game.layout_width -
-                                    self.game.player.x - width - 900, 100))
+                                  self.game.player.x - width - 900, 100))
