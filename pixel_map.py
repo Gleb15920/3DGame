@@ -80,14 +80,19 @@ class Pixel_map:
                 screen.blit(self.image, image_rect)
                 frame_count += 1
             else:
-                image_rect = self.image.get_rect(center=(width // 2, final_y))
-                screen.blit(self.image, image_rect)
-                done = True
-                txt = pg.font.SysFont(None, 48)
-                txt = txt.render('Хорошая концовка', True, colors.white)
-                screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
+                any_key = True
+                while any_key:
+                    for event in pg.event.get():
+                        if event.type == pg.KEYDOWN:
+                            any_key = False
+                    image_rect = self.image.get_rect(center=(width // 2, final_y))
+                    screen.blit(self.image, image_rect)
+                    done = True
+                    txt = pg.font.SysFont(None, 48)
+                    txt = txt.render('Хорошая концовка\nНажмите любую кнопку, чтобы продолжить', True, colors.white)
+                    screen.blit(txt, (width / 2 - txt.get_width() / 2, height / 2))
+                    pg.display.flip()
             pg.display.flip()
-        pg.time.delay(5000)
         self.game.screensaver.running_gui_manager = True
         self.game.screensaver.run_start_menu()
 
