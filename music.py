@@ -21,19 +21,23 @@ class Music:
             pg.mixer.music.stop()
             pg.mixer.music = self.metro_music
             pg.mixer.music.play(-1)
+            pg.mixer.music.set_volume(music_volume)
         elif num_level == 1:
             pg.mixer.music.stop()
             pg.mixer.music = self.town_music1
             pg.mixer.music.play(-1)
+            pg.mixer.music.set_volume(music_volume)
         elif num_level == 2:
             pg.mixer.music.stop()
             pg.mixer.music = self.boss_music
             pg.mixer.music.play(-1)
+            pg.mixer.music.set_volume(music_volume)
 
     def good_end(self):
         pg.mixer.music.stop()
         pg.mixer.music = self.good_end_music
         pg.mixer.music.play()
+        pg.mixer.music.set_volume(music_volume)
 
     def error(self):
         pg.mixer.music.stop()
@@ -47,3 +51,4 @@ class Music:
         pg.mixer.music.stop()
         pg.mixer.music = self.menu_music
         pg.mixer.music.play(-1)
+        pg.mixer.music.set_volume(music_volume)
