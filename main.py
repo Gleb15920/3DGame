@@ -2,6 +2,7 @@
 from pixel_map import Pixel_map
 from subway_braintest import Subway_Braintest
 from city_braintest import City_Braintest
+from forest_braintest import Forest_Braintest
 from settings import screen, width, running_gui_manager
 import pygame as pg
 from map import Map
@@ -10,7 +11,7 @@ from level import Level
 import colors
 from sprites import Sprites
 from random import randrange
-from screensavers import *
+from startscreensaver import *
 import sys
 
 class Game:
@@ -18,8 +19,8 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode(screen)
         self.running = False
-        self.num_level = 1 # !!!!!!!!!!!!!!!!
-        pg.event.set_grab(True)
+        self.num_level = 0 # !!!!!!!!!!!!!!!!
+        #pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
         MOVE_DOWN_DELAY = 500
@@ -37,7 +38,8 @@ class Game:
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.player = Player(self)
         self.subway_braintest = Subway_Braintest(self, self.sprites.arrows)
-        self.city_braintest = City_Braintest(self, self.sprites.puzzle2)
+        self.city_braintest = City_Braintest(self, self.sprites.city_puzzle)
+        self.forest_braintest = Forest_Braintest(self, self.sprites.forest_puzzle)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
 
@@ -51,6 +53,7 @@ class Game:
         self.map.draw_map(self.screen)
         self.subway_braintest.draw(self.screen)
         self.city_braintest.draw(self.screen)
+        self.forest_braintest.draw(self.screen)
         self.player.draw_player(self.screen)
         pg.display.update()
 

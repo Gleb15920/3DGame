@@ -8,6 +8,7 @@ class Screensaver:
         self.screen = pg.display.set_mode(screen)
         self.running_gui_manager = running_gui_manager
         self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
+        self.interval = 100
         self.start_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 300, 500, 70)),
                                                       text='Start',
                                                       manager=self.manager)
@@ -36,8 +37,8 @@ class Screensaver:
                     if hasattr(event, 'ui_element') and event.ui_element == self.start_btn:
                         self.running_gui_manager = False
                         self.game.run()
-                    elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
-                        pass
+                    # elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
+                    #     pass
                 if self.running_gui_manager:
                     self.manager.process_events(event)
             if self.running_gui_manager:

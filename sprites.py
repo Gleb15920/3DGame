@@ -35,11 +35,13 @@ class Sprites:
                                         self.game.levels[self.game.num_level].player_size[1] -
                                         self.car.get_size()[1]), (self.car, 0), (self.ept, self.game.levels[-1].y)]
 
-        self.puzzle2 = pg.image.load('resources/images/braintests/puzzle2.png')
-        self.puzzle2 = pg.transform.scale(self.puzzle2, (200, 200))
+        self.city_puzzle = pg.image.load('resources/images/braintests/city_puzzle.png')
+        self.city_puzzle = pg.transform.scale(self.city_puzzle, (170, 200))
 
-        self.arrow = pg.image.load('resources/images/braintests/arrow.png')
-        self.arrow = pg.transform.scale(self.arrow, (width // 6, height // 3))
+        self.forest_puzzle = pg.image.load('resources/images/braintests/forest_puzzle.png')
+        self.forest_puzzle = pg.transform.scale(self.forest_puzzle, (170, 170))
+
+
 
         self.walls = []
         for i in range(len([name for name in os.listdir('resources/images/walls')
@@ -51,6 +53,6 @@ class Sprites:
         self.arrows = []
         for i in range(len([name for name in os.listdir('resources/images/braintests/arrows')
                             if os.path.isfile(os.path.join('resources/images/braintests/arrows', name))])):
-             img = pg.image.load(f'resources/images/braintests/arrows/{i + 1}.png')
+             img = pg.image.load(f'resources/images/braintests/arrows/{i}.png')
              img = pg.transform.scale(img, ((width // 6, height // 3)))
              self.arrows.append(img)
