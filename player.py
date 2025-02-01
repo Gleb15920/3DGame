@@ -45,7 +45,7 @@ class Player:
             self.cont = False
 
     def change_level(self, screen, text):
-        self.game.sound.not_walk()
+        self.game.sound.teleport()
         self.game.health.do_pause()
         pg.draw.rect(screen, colors.black, (0, 0, width, height))
         for i in range(1500):
