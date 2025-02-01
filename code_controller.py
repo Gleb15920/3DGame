@@ -1,18 +1,17 @@
+
 class Code_controller:
-    right_codes = [
-        'code1',
-        'code2',
-        'code3',
-        'code4',
-    ]
+
     def __init__(self, player):
         self.player = player
+        self.right_codes = ['4312', '1', 'ьщщт']
 
     def is_checked(self, code):
+        code = code.rstrip()
         level = self.player.game.num_level
-        return code == self.right_codes[level - 1]
+        return code == self.right_codes[level]
 
     def check_code(self, code):
+        code = code.rstrip()
         level = self.player.game.num_level
         levels_count = len(self.player.game.levels)
         screen = self.player.game.screen

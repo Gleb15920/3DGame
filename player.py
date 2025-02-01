@@ -83,21 +83,21 @@ class Player:
                     if not self.jump:
                         self.vertical_velocity = -hight_jump
                         self.jump = True
-                if event.key == pg.K_e and self.cont:
-                    if self.game.num_level < len(self.game.levels) - 1:
-                        if self.game.num_level == 1:
-                            self.brumbrum(screen)
-                            self.change_level(screen, 'WHERE ARE YOU?')
-                        elif self.game.num_level == 2:
-                            self.change_level(screen, '! ! ! ! !  RUN  ! ! ! ! !')
-                        else:
-                            self.change_level(screen, 'WHERE ARE YOU?')
-                        self.game.num_level += 1
-                        self.game.new_game()
-                    else:
-                        pass # конец игры
+                # if event.key == pg.K_e and self.cont:
+                #     if self.game.num_level < len(self.game.levels) - 1:
+                #         if self.game.num_level == 1:
+                #             self.brumbrum(screen)
+                #             self.change_level(screen, 'WHERE ARE YOU?')
+                #         elif self.game.num_level == 2:
+                #             self.change_level(screen, '! ! ! ! !  RUN  ! ! ! ! !')
+                #         else:
+                #             self.change_level(screen, 'WHERE ARE YOU?')
+                #         self.game.num_level += 1
+                #         self.game.new_gxame()
+                #     else:
+                #         pass # конец игры
 
-                if event.key == pg.K_p and self.cont:
+                if event.key == pg.K_e and self.cont:
                     if self.game.num_level == 0 or self.game.num_level == 1 or self.game.num_level == 2:
                          self.code_window.run_start_menu()
 

@@ -1,6 +1,8 @@
 from screeninfo import get_monitors
 
 screen = width, height = get_monitors()[0].width, get_monitors()[0].height
+mid_width = width // 2
+
 
 speed = 30
 
