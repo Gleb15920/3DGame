@@ -15,3 +15,6 @@ gravity = 2
 hight_jump = 40
 
 health = 1 * 1000 * 60  # time of life in minutes
+
+music_volume = 1
+sound_volume = 1

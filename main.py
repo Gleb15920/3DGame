@@ -9,6 +9,7 @@ from sprites import Sprites
 from screensavers import Screensaver
 from subway_braintest import Subway_Braintest
 from gametime import GameTimer
+from music import Music
 
 
 class Game:
@@ -17,7 +18,7 @@ class Game:
         self.running = False
         self.health = GameTimer(health, self)
         self.screen = pg.display.set_mode(size)
-        self.num_level = 2  # !!!!!!!!!!!!!!!!
+        self.num_level = 0  # !!!!!!!!!!!!!!!!
         pg.event.set_grab(True)
         self.new_game()
         self.clock = pg.time.Clock()
@@ -33,6 +34,8 @@ class Game:
                        Level('resources/city_map.txt', 1, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
+        self.music = Music()
+        self.music.play(self.num_level)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
@@ -51,6 +54,7 @@ class Game:
         pg.display.update()
 
     def run(self):
+        self.music.play(self.num_level)
         while self.running:
             self.screen.fill(self.levels[self.num_level].background)
             self.player.control(self.screen)
