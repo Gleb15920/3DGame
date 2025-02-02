@@ -80,6 +80,7 @@ class Pixel_map:
                 screen.blit(self.image, image_rect)
                 frame_count += 1
             else:
+                pg.time.delay(2000)
                 any_key = True
                 while any_key:
                     for event in pg.event.get():
