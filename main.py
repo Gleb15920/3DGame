@@ -10,6 +10,7 @@ from screensavers import Screensaver
 from subway_braintest import Subway_Braintest
 from gametime import GameTimer
 from sound import Sound
+from radiation import Radiation
 
 
 class Game:
@@ -42,6 +43,7 @@ class Game:
         self.player = Player(self)
         self.subway_braintest = Subway_Braintest(self, self.sprites.arrow)
         self.p_map = Pixel_map(self, self.levels[-1])
+        self.radiation = Radiation(self, self.sprites.radiation_effect)
 
     def update(self):
         self.map.draw_map(self.screen)
@@ -51,6 +53,8 @@ class Game:
         self.player.draw_player(self.screen)
         if not self.health.update(self.screen):
             self.p_map.death(self.screen)
+        self.radiation.draw(self.screen, self.health.check_time())
+        self.sound.geiger(self.health.check_time())
         pg.display.update()
 
     def run(self):

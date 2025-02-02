@@ -88,6 +88,7 @@ class Player:
                     self.to_right = True
                 if event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE:
                     if not self.jump:
+                        self.game.sound.jump()
                         self.vertical_velocity = -hight_jump
                         self.jump = True
                 if event.key == pg.K_DOWN or event.key == pg.K_s:

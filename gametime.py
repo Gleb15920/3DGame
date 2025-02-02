@@ -31,7 +31,7 @@ class GameTimer:
     def check_time(self):
         self.cur_time = get_ticks()
         if self.cur_time - self.start_time <= self.duration:
-            return round(100 - (self.cur_time - self.start_time) / self.duration * 100)
+            return 100 - (self.cur_time - self.start_time) / self.duration * 100
         self.deactivate()
         return 0
 
