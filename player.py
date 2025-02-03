@@ -3,6 +3,7 @@ from settings import *
 import pygame as pg
 from random import randint
 from code_window import CodeWindow
+from pause_win import Pause
 
 
 class Player:
@@ -29,6 +30,7 @@ class Player:
         self.jump_off = False
         self.is_go_to_end = False
         self.wall = self.game.layout_width
+        self.pause_window = Pause(game)
         self.code_window = CodeWindow(game)
 
     def draw_player(self, screen):
@@ -78,7 +80,8 @@ class Player:
         pg.time.delay(30)
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                self.game.running = False
+                if self.pause_window.pause:
+                    self.pause_window.pause_game()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.game.sound.walk()

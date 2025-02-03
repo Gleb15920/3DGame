@@ -1,6 +1,6 @@
 from random import choice
-from PIL import Image
 import numpy as np
+from PIL import Image
 from settings import width, speed, height
 import pygame as pg
 import colors
@@ -20,7 +20,7 @@ class Pixel_map:
         self.eye_boss = self.game.sprites.lastboss
         self.monolog_bad_ending = ['Вот мы и встретились', 'Трудно наверное тебе пришлось здесь',
                                    'я твоё глубокое подсознание',
-                                   'к сожеленью ты неуспел вовремя убежать...',
+                                   'к сожалению ты не успел вовремя убежать...',
                                    'и высшие силы отформатировали этот мир', 'теперь мы будем вместе в этой пустоте',
                                    '...']
         self.monolog_good_ending = ['Аааах', 'цифровая пустота', 'а я тебя недооценил',
