@@ -37,7 +37,7 @@ class Game:
         self.health.activate()
         self.levels = [Level('resources/subway_map.txt', 2, 2, colors.dark_grey),
                        Level('resources/city_map.txt', 1, 2, colors.black),
-                       Level('resources/forest_map.txt', 1, 2, colors.black),
+                       Level('resources/forest_map.txt', 2, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
         self.sound.update(self.num_level)
