@@ -1,10 +1,8 @@
 from screeninfo import get_monitors
 
-screen = width, height = get_monitors()[0].width, get_monitors()[0].height
-mid_width = width // 2
+size = width, height = get_monitors()[0].width, get_monitors()[0].height
 
-
-speed = width // 10
+speed = 80
 
 arrow_amount = 4
 
@@ -15,3 +13,8 @@ running_gui_manager = True
 vertical_velocity = 0
 gravity = 2
 hight_jump = 40
+
+health = 1 * 1000 * 60  # time of life in minutes
+
+music_volume = 1  # from 0 to 1
+sound_volume = 1

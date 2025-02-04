@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pygame as pg
 import pygame_gui
-from settings import *
+from settings import size
 
 
 class CodeWindow:
@@ -11,6 +11,9 @@ class CodeWindow:
         self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
         self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((width / 2 - 250, 300, 500, 70)),
                                                              manager=self.manager)
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
+        self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((470, 300, 500, 70)),
+                                                      manager=self.manager)
         self.submit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70)),
                                                        text='Try',
                                                        manager=self.manager)
@@ -18,10 +21,7 @@ class CodeWindow:
                                                      text='<-',
                                                      manager=self.manager)
         self.text_result = pygame_gui.elements.UILabel(relative_rect=pg.Rect((470, 200, 300, 70)),
-                                                       manager=self.manager, text='')
-        #
-        # self.text_box = pygame_gui.elements.UILabel(relative_rect=pg.Rect(440, 100, 500, 70),
-        #                                             manager=self.manager, text='enter the right code')
+                                                   manager=self.manager, text='enter the right code')
         if self.game.num_level == 0:
             self.start_bg = pg.image.load('resources/images/start_menu/subway_bg.jpg')
         elif self.game.num_level == 1:

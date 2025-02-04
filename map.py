@@ -11,13 +11,13 @@ class Map:
         self.tile_x = self.game.levels[self.game.num_level].tile_x
         self.tile_y = self.game.levels[self.game.num_level].tile_y
         self.animate = False
-        
+
     def open_map(self, path):
         with open(path, 'r') as file:
             self.map = file.readlines()
         return [list(elem.replace('\n', '')) for elem in self.map]
-    
-    def draw_map(self , screen):
+
+    def draw_map(self, screen):
         self.barriers = []
         x_player = self.game.player.x
         if x_player < 0:
@@ -58,4 +58,4 @@ class Map:
                     self.barriers.append(((j + 1) * self.tile_x - width / 2, (i - 1) * self.tile_y))
                 if not self.animate:
                     screen.blit(self.doors[0], (self.game.layout_width -
-                                            self.game.player.x - width / 2, self.doors[1]))
+                                                self.game.player.x - width / 2, self.doors[1]))
