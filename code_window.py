@@ -9,7 +9,7 @@ class CodeWindow:
         self.running = False
         self.game = game
         self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
-        self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((470, 300, 500, 70)),
+        self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((width / 2 - 250, 300, 500, 70)),
                                                              manager=self.manager)
         self.submit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70)),
                                                        text='Try',
