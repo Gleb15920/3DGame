@@ -8,15 +8,13 @@ class Screensaver:
         self.screen = pg.display.set_mode(size)
         self.running_gui_manager = running_gui_manager
         self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
-        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
-        self.interval = 100
         self.start_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 300, 500, 70)),
                                                       text='Start',
                                                       manager=self.manager)
-        # self.settings_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70), ),
-        #                                                  text='Settings',
-        #                                                  manager=self.manager)
-        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 400, 500, 70), ),
+        self.settings_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 400, 500, 70), ),
+                                                         text='Settings',
+                                                         manager=self.manager)
+        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 500, 500, 70), ),
                                                      text='Exit',
                                                      manager=self.manager)
 
@@ -41,6 +39,8 @@ class Screensaver:
                         self.running_gui_manager = False
                         self.game.__init__()
                         self.game.run()
+                    elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
+                        pass
                 if self.running_gui_manager:
                     self.manager.process_events(event)
             if self.running_gui_manager:
@@ -48,4 +48,3 @@ class Screensaver:
                 self.screen.blit(self.start_bg, (0, 0))
                 self.manager.draw_ui(self.screen)
                 pg.display.update()
-

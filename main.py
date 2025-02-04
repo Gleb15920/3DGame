@@ -13,6 +13,7 @@ from startscreensaver import Screensaver
 from subway_braintest import Subway_Braintest
 from gametime import GameTimer
 from sound import Sound
+from radiation import Radiation
 
 
 class Game:
@@ -39,7 +40,7 @@ class Game:
                        Level('resources/city_map.txt', 1, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
-        self.sound.play_music(self.num_level)
+        self.sound.update(self.num_level)
         self.map = Map(self, self.levels[self.num_level].map_path)
         self.layout_width = (len(self.map.map[0]) * self.levels[self.num_level].tile_x)
         self.layout_height = (len(self.map.map) * self.levels[self.num_level].tile_y)
@@ -48,6 +49,7 @@ class Game:
         self.city_braintest = City_Braintest(self, self.sprites.city_puzzle)
         self.forest_braintest = Forest_Braintest(self, self.sprites.forest_puzzle)
         self.p_map = Pixel_map(self, self.levels[-1])
+        self.radiation = Radiation(self, self.sprites.radiation_effect)
 
 
     def update(self):
@@ -59,10 +61,12 @@ class Game:
         self.player.draw_player(self.screen)
         if not self.health.update(self.screen):
             self.p_map.death(self.screen)
+        self.radiation.draw(self.screen, self.health.check_time())
+        self.sound.geiger(self.health.check_time())
         pg.display.update()
 
     def run(self):
-        self.sound.play_music(self.num_level)
+        self.sound.update(self.num_level)
         while self.running:
             self.screen.fill(self.levels[self.num_level].background)
             self.player.control(self.screen)

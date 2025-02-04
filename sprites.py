@@ -64,6 +64,9 @@ class Sprites:
 
 
 
+        self.radiation_effect = pg.image.load('resources/images/radiation_effect.png')
+        self.radiation_effect = pg.transform.scale(self.radiation_effect, (width, height))
+
         self.walls = []
         for i in range(len([name for name in os.listdir('resources/images/walls')
                             if os.path.isfile(os.path.join('resources/images/walls', name))])):
