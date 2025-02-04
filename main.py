@@ -1,6 +1,5 @@
 from pixel_map import Pixel_map
 from city_braintest import City_Braintest
-from forest_braintest import Forest_Braintest
 from settings import size, width, running_gui_manager
 import pygame as pg
 from map import Map
@@ -38,6 +37,7 @@ class Game:
         self.health.activate()
         self.levels = [Level('resources/subway_map.txt', 2, 2, colors.dark_grey),
                        Level('resources/city_map.txt', 1, 2, colors.black),
+                       Level('resources/forest_map.txt', 1, 2, colors.black),
                        Level('resources/void_map.txt', 4, 3, colors.white)]
         self.sprites = Sprites(self)
         self.sound.update(self.num_level)
@@ -47,7 +47,6 @@ class Game:
         self.player = Player(self)
         self.subway_braintest = Subway_Braintest(self, self.sprites.arrows)
         self.city_braintest = City_Braintest(self, self.sprites.city_puzzle)
-        self.forest_braintest = Forest_Braintest(self, self.sprites.forest_puzzle)
         self.p_map = Pixel_map(self, self.levels[-1])
         self.radiation = Radiation(self, self.sprites.radiation_effect)
 
@@ -56,7 +55,6 @@ class Game:
         self.map.draw_map(self.screen)
         self.subway_braintest.draw(self.screen)
         self.city_braintest.draw(self.screen)
-        self.forest_braintest.draw(self.screen)
         self.p_map.boss(self.screen)
         self.player.draw_player(self.screen)
         if not self.health.update(self.screen):

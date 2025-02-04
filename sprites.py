@@ -52,17 +52,15 @@ class Sprites:
         w_ept = (310 * h_ept) / 250
         self.ept = pg.transform.scale(self.ept, (w_ept, h_ept))
 
-        self.doors = [(self.stair, 0), (self.car, self.game.levels[self.game.num_level].y +
-                                        self.game.levels[self.game.num_level].player_size[1] -
-                                        self.car.get_size()[1]), (self.ept, self.tile_y * 2 - h_ept)]
-
-        self.city_puzzle = pg.image.load('resources/images/braintests/city_puzzle.png')
-        self.city_puzzle = pg.transform.scale(self.city_puzzle, (170, 200))
-
         self.forest_puzzle = pg.image.load('resources/images/braintests/forest_puzzle.png')
         self.forest_puzzle = pg.transform.scale(self.forest_puzzle, (170, 170))
 
+        self.doors = [(self.stair, 0), (self.car, self.game.levels[self.game.num_level].y +
+                                        self.game.levels[self.game.num_level].player_size[1] -
+                                        self.car.get_size()[1]), (self.forest_puzzle, 30),(self.ept, self.tile_y * 2 - h_ept)]
 
+        self.city_puzzle = pg.image.load('resources/images/braintests/city_puzzle.png')
+        self.city_puzzle = pg.transform.scale(self.city_puzzle, (170, 200))
 
         self.radiation_effect = pg.image.load('resources/images/radiation_effect.png')
         self.radiation_effect = pg.transform.scale(self.radiation_effect, (width, height))

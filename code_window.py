@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 import pygame as pg
 import pygame_gui
-from settings import size
+from settings import size, width
 
 
 class CodeWindow:
     def __init__(self, game, code_controller):
         self.running = False
         self.game = game
-        self.manager = pygame_gui.UIManager(screen, 'resources/theme.json')
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
         self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((width / 2 - 250, 300, 500, 70)),
                                                              manager=self.manager)
         self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
-        self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((470, 300, 500, 70)),
+        self.text_field = pygame_gui.elements.UITextEntryBox(relative_rect=pg.Rect((width / 2 - 250, 300, 500, 70)),
                                                       manager=self.manager)
-        self.submit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 400, 500, 70)),
+        self.submit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 400, 500, 70)),
                                                        text='Try',
                                                        manager=self.manager)
-        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((470, 500, 500, 70)),
+        self.exit_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((width / 2 - 250, 500, 500, 70)),
                                                      text='<-',
                                                      manager=self.manager)
-        self.text_result = pygame_gui.elements.UILabel(relative_rect=pg.Rect((470, 200, 300, 70)),
-                                                   manager=self.manager, text='enter the right code')
+        self.text_result = pygame_gui.elements.UILabel(relative_rect=pg.Rect((width / 2 - 250, 200, 300, 70)),
+                                                   manager=self.manager, text='')
         if self.game.num_level == 0:
             self.start_bg = pg.image.load('resources/images/start_menu/subway_bg.jpg')
         elif self.game.num_level == 1:
@@ -29,7 +29,7 @@ class CodeWindow:
         else:
             self.start_bg = pg.image.load('resources/images/start_menu/start_background.jpg')
 
-        self.start_bg = pg.transform.scale(self.start_bg, screen)
+        self.start_bg = pg.transform.scale(self.start_bg, size)
         self.clock = pg.time.Clock()
         self.game = game
         self.code_controller = code_controller
