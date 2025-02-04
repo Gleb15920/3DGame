@@ -27,6 +27,7 @@ class GameTimer:
 
     def do_pause(self):
         self.pause = True
+        print("ewfwefw")
 
     def check_time(self):
         self.cur_time = get_ticks()
@@ -38,6 +39,7 @@ class GameTimer:
     def update(self, screen: pg.display):
         if self.active:
             self.draw_health_bar(screen, self.check_time())
+            print(self.check_time())
             return True
         return False
 

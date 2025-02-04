@@ -50,7 +50,6 @@ class Game:
         self.p_map = Pixel_map(self, self.levels[-1])
         self.radiation = Radiation(self, self.sprites.radiation_effect)
 
-
     def update(self):
         self.map.draw_map(self.screen)
         self.subway_braintest.draw(self.screen)

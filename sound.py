@@ -15,6 +15,7 @@ class Sound:
         self.good_end_music = pg.mixer.Sound("resources/music/good_end_music.mp3")
         self.death_sound = pg.mixer.Sound("resources/music/death_sound.mp3")
         self.menu_music = pg.mixer.Sound("resources/music/menu_music.wav")
+        self.forest_music = pg.mixer.Sound("resources/music/forest_music.mp3")
 
         self.error_sound = pg.mixer.Sound("resources/sound/error_sound.mp3")
         self.metro_walking_sound = pg.mixer.Sound("resources/sound/metro_walking_sound.mp3")
@@ -42,6 +43,11 @@ class Sound:
             pg.mixer.music.play(-1)
             pg.mixer.music.set_volume(music_volume)
         elif num_level == 2:
+            pg.mixer.music.stop()
+            pg.mixer.music = self.forest_music
+            pg.mixer.music.play(-1)
+            pg.mixer.music.set_volume(music_volume)
+        elif num_level == 3:
             pg.mixer.music.stop()
             pg.mixer.music = self.boss_music
             pg.mixer.music.play(-1)
@@ -109,4 +115,5 @@ class Sound:
         if health <= 50:
             if health % (random.randint(health // 10 + 1, 11)) == 0 and self.health != health:
                 self.geiger_sound.play()
+                self.geiger_sound.set_volume(sound_volume)
                 self.health = health
