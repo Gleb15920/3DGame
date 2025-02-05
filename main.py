@@ -24,7 +24,7 @@ class Game:
         self.new_game()
         self.clock = pg.time.Clock()
         MOVE_DOWN_DELAY = 500
-        MOVE_DOWN_EVENT = pg.USEREVENT + 1
+        MOVE_DOWN_EVENT = pg.event.custom_type()
         pg.time.set_timer(MOVE_DOWN_EVENT, MOVE_DOWN_DELAY)
 
     def new_game(self):
