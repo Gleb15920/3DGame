@@ -63,11 +63,11 @@
      {
          "colours":
          {
-             "normal_text": "white"
+             "normal_text": "#013220"
          },
          "font":
          {
-             "size": "48"
+             "size": "20"
          },
          "misc":
          {

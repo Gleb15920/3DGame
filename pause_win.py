@@ -10,7 +10,7 @@ class Pause:
         self.screen = game.screen
         self.clock = pg.time.Clock()
         self.pause = True
-        self.manager = pygame_gui.UIManager(size, 'resources/theme2.json')
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
         self.continue_btn = pygame_gui.elements.UIButton(relative_rect=pg.Rect((size[0] // 2 - 200, size[1] // 2 - 200, 400, 70)),
                                                      text='Continue',
                                                      manager=self.manager)

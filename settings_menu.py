@@ -7,7 +7,7 @@ import settings
 class Settings:
     def __init__(self, game, size):
         self.running = False
-        self.manager = pygame_gui.UIManager(size, 'resources/theme3.json')
+        self.manager = pygame_gui.UIManager(size, 'resources/theme.json')
         self.size = size
         self.surface = pg.Surface(size, SRCALPHA)
         self.clock = pg.time.Clock()
@@ -32,10 +32,9 @@ class Settings:
                                                                start_value=self.speed,
                                                                value_range=(40.0, 200.0),
                                                                manager=self.manager)
-        self.back_button = pygame_gui.elements.UIButton(
-            relative_rect=pg.Rect((self.size[0] // 2 - 100, self.size[1] - 100), (200, 50)),
-            text='Back to Menu',
-            manager=self.manager)
+        self.back_button = pygame_gui.elements.UIButton(relative_rect=pg.Rect((self.size[0] // 2 - 100, self.size[1] - 100), (200, 50)),
+                                                        text='Back to Menu',
+                                                        manager=self.manager)
 
     def draw_menu(self):
         self.surface.fill((0, 0, 0, 0))
