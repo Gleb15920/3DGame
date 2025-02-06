@@ -1,7 +1,7 @@
 from random import choice
 from PIL import Image
 import numpy as np
-from settings import width, speed, height
+from settings import width, height
 import pygame as pg
 import colors
 
@@ -136,7 +136,7 @@ class Pixel_map:
                     self.game.player.draw_player(screen)
                     pg.display.flip()
             else:
-                self.sprite.rect.x += speed * 0.15
+                self.sprite.rect.x += self.game.settings.speed * 0.15
                 self.all_sprites.draw(screen)
                 try:
                     self.im = self.dark_side_block.crop((0, 0, int(self.sprite.rect.x), height))

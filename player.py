@@ -31,7 +31,7 @@ class Player:
         self.is_go_to_end = False
         self.code_controller = Code_controller(self, self.game)
         self.code_window = CodeWindow(game, self.code_controller)
-        self.pause_window = Pause(game)
+        self.pause_window = Pause(game, size)
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -94,7 +94,7 @@ class Player:
                         else:
                             self.wall = min(list, key=lambda x: abs(x - self.x)) - self.level.tile_y - self.size[0]
                     if self.wall >= self.x:
-                        self.x += speed
+                        self.x += self.game.settings.speed
                 if self.anim_shot < len(self.animation):
                     self.anim_shot += 1
                 else:
@@ -102,7 +102,7 @@ class Player:
                 self.animation = self.player_imgs_r
             if self.to_left:
                 if width / 2 - self.size[0] / 2 > -self.x:
-                    self.x -= speed
+                    self.x -= self.game.settings.speed
                 if self.anim_shot < len(self.animation):
                     self.anim_shot += 1
                 else:

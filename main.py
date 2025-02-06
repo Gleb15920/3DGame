@@ -30,6 +30,7 @@ class Game:
         MOVE_DOWN_EVENT = pg.USEREVENT + 1
         pg.time.set_timer(MOVE_DOWN_EVENT, MOVE_DOWN_DELAY)
         self.screensaver = Screensaver(self)
+        self.settings = Settings(self, size)
 
     def new_game(self):
         self.running = True

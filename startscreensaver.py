@@ -1,7 +1,6 @@
 import pygame as pg
 import pygame_gui
 from settings import *
-from settings_menu import Settings
 
 
 class Screensaver:
@@ -23,7 +22,6 @@ class Screensaver:
         self.start_bg = pg.transform.scale(self.start_bg, size)
         self.clock = pg.time.Clock()
         self.game = game
-        self.settings = Settings(self.game, size)
         self.screen = game.screen
 
     def run_start_menu(self):
@@ -42,7 +40,7 @@ class Screensaver:
                         self.game.__init__()
                         self.game.run()
                     elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
-                        self.settings.run_settings()
+                        self.game.settings.run_settings()
                 if self.running_gui_manager:
                     self.manager.process_events(event)
             if self.running_gui_manager:
