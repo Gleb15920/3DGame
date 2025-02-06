@@ -29,6 +29,8 @@ class Pause:
 
     def pause_game(self):
         self.game.paused = True
+        self.game.health.do_pause()
+        self.game.sound.not_walk()
         while self.game.paused:
             time_delta = self.clock.tick(60) / 1000.0
             for event in pg.event.get():
@@ -42,6 +44,7 @@ class Pause:
                     if hasattr(event, 'ui_element') and event.ui_element == self.continue_btn:
                         self.game.paused = False
                         self.game.running = True
+                        self.game.health.activate()
                     if hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:
                         self.game.settings.run_settings()
                         self.game.running = False

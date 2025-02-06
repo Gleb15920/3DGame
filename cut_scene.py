@@ -3,7 +3,7 @@ import cv2
 
 
 def cut_scence():
-    video = cv2.VideoCapture("resources/video_boom/boom.MP4")
+    video = cv2.VideoCapture("resources/video/boom.MP4")
     success, video_image = video.read()
     fps = video.get(cv2.CAP_PROP_FPS)
 

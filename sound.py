@@ -1,13 +1,13 @@
 import random
 
 import pygame as pg
-from settings import music_volume, sound_volume
+import settings
 
 
 class Sound:
     def __init__(self):
         pg.init()
-        pg.mixer.music.set_volume(music_volume)
+        pg.mixer.music.set_volume(settings.music_volume)
         pg.mixer.music.stop()
         self.metro_music = pg.mixer.Sound("resources/music/metro_music.wav")
         self.town_music = pg.mixer.Sound("resources/music/town_music1.wav")
@@ -36,22 +36,22 @@ class Sound:
             pg.mixer.music.stop()
             pg.mixer.music = self.metro_music
             pg.mixer.music.play(-1)
-            pg.mixer.music.set_volume(music_volume)
+            pg.mixer.music.set_volume(settings.music_volume)
         elif num_level == 1:
             pg.mixer.music.stop()
             pg.mixer.music = self.town_music
             pg.mixer.music.play(-1)
-            pg.mixer.music.set_volume(music_volume)
+            pg.mixer.music.set_volume(settings.music_volume)
         elif num_level == 2:
             pg.mixer.music.stop()
             pg.mixer.music = self.forest_music
             pg.mixer.music.play(-1)
-            pg.mixer.music.set_volume(music_volume)
+            pg.mixer.music.set_volume(settings.music_volume)
         elif num_level == 3:
             pg.mixer.music.stop()
             pg.mixer.music = self.boss_music
             pg.mixer.music.play(-1)
-            pg.mixer.music.set_volume(music_volume)
+            pg.mixer.music.set_volume(settings.music_volume)
 
     def good_end(self):
         self.geiger_sound.stop()
@@ -59,7 +59,7 @@ class Sound:
         pg.mixer.music.stop()
         pg.mixer.music = self.good_end_music
         pg.mixer.music.play()
-        pg.mixer.music.set_volume(music_volume)
+        pg.mixer.music.set_volume(settings.music_volume)
 
     def error(self):
         self.geiger_sound.stop()
@@ -79,12 +79,12 @@ class Sound:
         pg.mixer.music.stop()
         pg.mixer.music = self.menu_music
         pg.mixer.music.play(-1)
-        pg.mixer.music.set_volume(music_volume)
+        pg.mixer.music.set_volume(settings.music_volume)
 
     def walk(self):
         if not self.walking:
             self.city_walking_sound.play()
-            self.city_walking_sound.set_volume(sound_volume)
+            self.city_walking_sound.set_volume(settings.sound_volume)
             self.walking = True
 
     def not_walk(self):
@@ -94,26 +94,28 @@ class Sound:
     def car(self):
         self.not_walk()
         self.car_sound.play()
-        self.car_sound.set_volume(sound_volume)
+        self.car_sound.set_volume(settings.sound_volume)
 
     def hit(self):
         self.hit_sound.play()
-        self.hit_sound.set_volume(sound_volume)
+        self.hit_sound.set_volume(settings.sound_volume)
 
     def teleport(self):
         self.not_walk()
         pg.mixer.music.stop()
         self.teleport_sound.play()
-        self.teleport_sound.set_volume(sound_volume)
+        self.teleport_sound.set_volume(settings.sound_volume)
 
     def jump(self):
         self.jump_sound.play()
-        self.jump_sound.set_volume(sound_volume)
+        self.jump_sound.set_volume(settings.sound_volume)
 
     def geiger(self, health):
         health = round(health)
         if health <= 50:
             if health % (random.randint(health // 10 + 1, 11)) == 0 and self.health != health:
                 self.geiger_sound.play()
-                self.geiger_sound.set_volume(sound_volume)
+                self.geiger_sound.set_volume(settings.sound_volume)
                 self.health = health
+
+

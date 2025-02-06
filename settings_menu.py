@@ -56,6 +56,8 @@ class Settings:
                     if hasattr(event, 'ui_element'):
                         if event.ui_element == self.back_button:
                             settings.music_volume = self.music_volume
+                            settings.sound_volume = self.music_volume
+                            pg.mixer.music.set_volume(settings.music_volume)
                             settings.speed = self.speed
                             self.running = False
 

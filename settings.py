@@ -16,5 +16,5 @@ hight_jump = 40
 
 health = 1 * 1000 * 60  # time of life in minutes
 
-music_volume = 1  # from 0 to 1
-sound_volume = 1
+music_volume = 1.0  # from 0 to 1
+sound_volume = 1.0
