@@ -1,7 +1,5 @@
 from pixel_map import Pixel_map
 from city_braintest import City_Braintest
-from settings import size, width, running_gui_manager
-import pygame as pg
 from map import Map
 from player import Player
 from level import Level
@@ -13,6 +11,7 @@ from subway_braintest import Subway_Braintest
 from gametime import GameTimer
 from sound import Sound
 from radiation import Radiation
+from settings_menu import Settings
 
 
 class Game:

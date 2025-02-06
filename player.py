@@ -1,10 +1,9 @@
-import colors
 from code_controller import Code_controller
-from code_window import CodeWindow
 from settings import *
 import pygame as pg
-from random import randint
 from code_window import CodeWindow
+from pause_win import Pause
+
 
 
 class Player:
@@ -32,6 +31,7 @@ class Player:
         self.is_go_to_end = False
         self.code_controller = Code_controller(self, self.game)
         self.code_window = CodeWindow(game, self.code_controller)
+        self.pause_window = Pause(game)
 
     def draw_player(self, screen):
         if self.x >= 0:
@@ -50,7 +50,8 @@ class Player:
         pg.time.delay(30)
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                self.game.running = False
+                if self.pause_window.pause:
+                    self.pause_window.pause_game()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_LEFT or event.key == pg.K_a:
                     self.game.sound.walk()
