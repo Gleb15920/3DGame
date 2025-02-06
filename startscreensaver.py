@@ -1,6 +1,7 @@
 import pygame as pg
 import pygame_gui
 from settings import *
+from cut_scene import cut_scence
 
 
 class Screensaver:
@@ -37,6 +38,8 @@ class Screensaver:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if hasattr(event, 'ui_element') and event.ui_element == self.start_btn:
                         self.running_gui_manager = False
+                        pg.mixer.music.stop()
+                        cut_scence()
                         self.game.__init__()
                         self.game.run()
                     elif hasattr(event, 'ui_element') and event.ui_element == self.settings_btn:

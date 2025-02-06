@@ -8,7 +8,7 @@ class Code_controller:
 
     def __init__(self, player, game):
         self.player = player
-        self.right_codes = ['4312', '1', 'ьщщт']
+        self.right_codes = ['4312', '321', 'ьщщт']
         self.game = game
 
     def is_checked(self, code):
