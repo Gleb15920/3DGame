@@ -41,7 +41,7 @@ ESC - пауза игры (открытие меню)
 <br>
 E - открытие окна ввода ключа головоломки
 
-см. Презентацию https://disk.yandex.ru/d/j7sJiPNhkswQ5Q
+см. Презентацию https://disk.yandex.ru/d/A90Fes_gze-bcQ
 
 
 
